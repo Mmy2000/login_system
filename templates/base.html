@@ -3,58 +3,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="pragma" content="no-cache" />
-    <meta http-equiv="cache-control" content="max-age=604800" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="max-age=604800" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>GreatKart | One of the Biggest Online Shopping Platform</title>
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
-
-
-
-    <link href="{% static 'images/favicon.ico'%}" rel="shortcut icon" type="image/x-icon">
-
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery-2.0.0.min.js'%}" type="text/javascript"></script>
-
-    <!-- Bootstrap4 files-->
-    <script src="{% static 'js/bootstrap.bundle.min.js'%}" type="text/javascript"></script>
-
-    <link href="{% static 'css/bootstrap.css'%}" rel="stylesheet" type="text/css" />
+	<title>GreatKart | One of the Biggest Online Shopping Platform</title>
+	<link href="https://fonts.gstatic.com" rel="preconnect">
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+		rel="stylesheet">
 
 
-    <!-- Font awesome 5 -->
-    <link href="{% static 'fonts/fontawesome/css/all.min.css'%}" type="text/css" rel="stylesheet">
 
-    <!-- custom style -->
-    <link href="{% static 'css/ui.css'%}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/responsive.css'%}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-    <link href="{% static 'css/custum.css'%}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- custom javascript -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AfhRi5NacG2GzmUDJyEynFYjwCsh_Vv_JMOz6CP3Vz7biQW0khyJA_C2lXUo62kgQOHN3mEk2urNO5Ol&currency=USD"></script>
+	<link href="{% static 'images/favicon.ico'%}" rel="shortcut icon" type="image/x-icon">
 
-    <script src="{% static 'js/script.js'%}" type="text/javascript"></script>
+	<!-- jQuery -->
+	<script src="{% static 'js/jquery-2.0.0.min.js'%}" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        /// some script
+	<!-- Bootstrap4 files-->
+	<script src="{% static 'js/bootstrap.bundle.min.js'%}" type="text/javascript"></script>
 
-        // jquery ready start
-        $(document).ready(function () {
-            // jQuery code
+	<link href="{% static 'css/bootstrap.css'%}" rel="stylesheet" type="text/css" />
 
-        });
-        // jquery end
-    </script>
-    <style>
-        .messages {
-            margin-top: 85px;
-        }
-    </style>
+
+	<!-- Font awesome 5 -->
+	<link href="{% static 'fonts/fontawesome/css/all.min.css'%}" type="text/css" rel="stylesheet">
+
+	<!-- custom style -->
+	<link href="{% static 'css/ui.css'%}" rel="stylesheet" type="text/css" />
+	<link href="{% static 'css/responsive.css'%}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+	<link href="{% static 'css/custum.css'%}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- custom javascript -->
+	<script
+		src="https://www.paypal.com/sdk/js?client-id=AfhRi5NacG2GzmUDJyEynFYjwCsh_Vv_JMOz6CP3Vz7biQW0khyJA_C2lXUo62kgQOHN3mEk2urNO5Ol&currency=USD">
+	</script>
+
+	<script src="{% static 'js/script.js'%}" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		/// some script
+
+		// jquery ready start
+		$(document).ready(function () {
+			// jQuery code
+
+		});
+		// jquery end
+	</script>
+	<style>
+		.messages {
+			margin-top: 85px;
+		}
+	</style>
 
 </head>
 
@@ -126,16 +128,19 @@
 					<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
 						<div class="d-flex justify-content-end mb-3 mb-lg-0">
 							<div class="widget-header">
+								{% if request.user.is_authenticated %}
 								<small class="title text-muted">Welcome {{user.first_name}}!</small>
 								<div>
-									{% if request.user.is_authenticated %}
-									<a href="{% url 'logout'%}">Log Out</a> <span class="dark-transp"> | </span>
-									<a href="{% url 'register'%}"> Register</a>
-									{% else %}
+									<a href="{% url 'logout'%}">Logout</a> <span class="dark-transp"> | </span>
+									<a href=""> Profile</a>
+								</div>
+								{% else %}
+								<small class="title text-muted">Welcome Guests!</small>
+								<div>
 									<a href="{% url 'login'%}">Sign in</a> <span class="dark-transp"> | </span>
 									<a href="{% url 'register'%}"> Register</a>
-									{% endif %}
 								</div>
+								{% endif %}
 							</div>
 							<a href="./cart.html" class="widget-header pl-3 ml-3">
 								<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
@@ -157,9 +162,9 @@
 	<!-- ========================= SECTION MAIN ========================= -->
 
 
-    {% block body %}
-    {% endblock body %}
-    <!-- ========================= FOOTER ========================= -->
+	{% block body %}
+	{% endblock body %}
+	<!-- ========================= FOOTER ========================= -->
 	<footer class="section-footer border-top">
 		<div class="container">
 			<section class="footer-bottom border-top row">
@@ -179,7 +184,7 @@
 			</section>
 		</div><!-- //container -->
 	</footer>
-    <!-- ========================= FOOTER END // ========================= -->
+	<!-- ========================= FOOTER END // ========================= -->
 
 </body>
 
