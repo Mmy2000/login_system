@@ -128,8 +128,13 @@
 							<div class="widget-header">
 								<small class="title text-muted">Welcome guest!</small>
 								<div>
+									{% if request.user.is_authenticated %}
+									<a href="{% url 'logout'%}">Log Out</a> <span class="dark-transp"> | </span>
+									<a href="{% url 'register'%}"> Register</a>
+									{% else %}
 									<a href="{% url 'login'%}">Sign in</a> <span class="dark-transp"> | </span>
 									<a href="{% url 'register'%}"> Register</a>
+									{% endif %}
 								</div>
 							</div>
 							<a href="./cart.html" class="widget-header pl-3 ml-3">
