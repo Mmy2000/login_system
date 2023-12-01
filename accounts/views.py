@@ -151,3 +151,6 @@ def profile(request):
 
 
     return render(request,'accounts/profile.html',{'profile':profile})
+
+def edit_profile(request):
+    pass
