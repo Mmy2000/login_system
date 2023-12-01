@@ -145,13 +145,15 @@ def resetPassword(request):
             return redirect('resetPassword')
     else:
         return render(request, 'accounts/resetPassword.html')
-    
+
+@login_required(login_url = 'login')
 def profile(request):
     profile=Profile.objects.get(user=request.user)
 
 
     return render(request,'accounts/profile.html',{'profile':profile})
 
+@login_required(login_url = 'login')
 def edit_profile(requset):
     profile = Profile.objects.get(user=requset.user)
     if requset.method == "POST":
