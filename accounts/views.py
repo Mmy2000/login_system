@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from .forms import RegistrationForm
+from .forms import RegistrationForm ,UserForm , ProfileForm
 from .models import Account , Profile
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
@@ -152,5 +152,23 @@ def profile(request):
 
     return render(request,'accounts/profile.html',{'profile':profile})
 
-def edit_profile(request):
-    pass
+def edit_profile(requset):
+    profile = Profile.objects.get(user=requset.user)
+    if requset.method == "POST":
+        user_form = UserForm(requset.POST , instance=requset.user)
+        profile_form = ProfileForm(requset.POST,requset.FILES,instance=profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            myprofile = profile_form.save(commit=False)
+            myprofile.user = requset.user
+            myprofile.save()
+            return redirect('/accounts/profile')
+    else:
+        user_form = UserForm(instance=requset.user)
+        profile_form = ProfileForm(instance=profile)
+
+    return render(requset,'accounts/profile_edit.html',{
+        'user_form':user_form,
+        'profile_form':profile_form
+    })
