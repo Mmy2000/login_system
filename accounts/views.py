@@ -163,6 +163,7 @@ def edit_profile(requset):
             myprofile = profile_form.save(commit=False)
             myprofile.user = requset.user
             myprofile.save()
+            messages.success(requset, 'Profile updated successfully')
             return redirect('/accounts/profile')
     else:
         user_form = UserForm(instance=requset.user)
