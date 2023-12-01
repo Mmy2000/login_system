@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from .forms import RegistrationForm
-from .models import Account
+from .models import Account , Profile
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 # Verification email
@@ -58,7 +58,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            return redirect('profile')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
@@ -145,3 +145,9 @@ def resetPassword(request):
             return redirect('resetPassword')
     else:
         return render(request, 'accounts/resetPassword.html')
+    
+def profile(request):
+    profile=Profile.objects.get(user=request.user)
+
+
+    return render(request,'accounts/profile.html',{'profile':profile})
