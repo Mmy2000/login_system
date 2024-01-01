@@ -149,9 +149,26 @@ def resetPassword(request):
 @login_required(login_url = 'login')
 def profile(request):
     profile=Profile.objects.get(user=request.user)
+    if request.method == "POST":
+        user_form = UserForm(request.POST , instance=request.user)
+        profile_form = ProfileForm(request.POST,request.FILES,instance=profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            myprofile = profile_form.save(commit=False)
+            myprofile.user = request.user
+            myprofile.save()
+            messages.success(request, 'Profile updated successfully')
+            return redirect('/accounts/profile')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=profile)
 
 
-    return render(request,'accounts/profile.html',{'profile':profile})
+    return render(request,'accounts/profile.html',{'profile':profile,
+                                                   'user_form':user_form,
+        'profile_form':profile_form})
+
 
 @login_required(login_url = 'login')
 def edit_profile(requset):
