@@ -128,3 +128,26 @@ class Day(models.Model):
     def __str__(self):
         return self.name
     
+
+hours = (
+    (2,2),
+    (3,3),
+    (5,5),
+    (5,5),
+    (6,6),
+    (7,7),
+    (8,8),
+    (9,9),
+    (10,10),
+    (11,11),
+    (12,12),
+)
+
+class Book(models.Model):
+    user = models.ForeignKey(Account,  on_delete=models.CASCADE)
+    day = models.ForeignKey(Day,  on_delete=models.CASCADE)
+    date = models.IntegerField( choices=hours)
+
+    def __str__(self):
+        return str(self.day)
+    
