@@ -130,17 +130,17 @@ class Day(models.Model):
     
 
 hours = (
-    (2,2),
-    (3,3),
-    (5,5),
-    (5,5),
-    (6,6),
-    (7,7),
-    (8,8),
-    (9,9),
-    (10,10),
-    (11,11),
-    (12,12),
+    (2,"2 o'clock"),
+    (3,"3 o'clock"),
+    (5,"5 o'clock"),
+    (5,"5 o'clock"),
+    (6,"6 o'clock"),
+    (7,"7 o'clock"),
+    (8,"8 o'clock"),
+    (9,"9 o'clock"),
+    (10,"10 o'clock"),
+    (11,"11 o'clock"),
+    (12,"12 o'clock"),
 )
 
 class Book(models.Model):
