@@ -128,11 +128,10 @@ class Day(models.Model):
     def __str__(self):
         return self.name
     
-
 hours = (
     (2,"2 o'clock"),
     (3,"3 o'clock"),
-    (5,"5 o'clock"),
+    (4,"4 o'clock"),
     (5,"5 o'clock"),
     (6,"6 o'clock"),
     (7,"7 o'clock"),
@@ -145,9 +144,25 @@ hours = (
 
 class Book(models.Model):
     user = models.ForeignKey(Account,  on_delete=models.CASCADE)
-    day = models.ForeignKey(Day,  on_delete=models.CASCADE)
+    day = models.ForeignKey(Day, related_name="book_property",  on_delete=models.CASCADE)
     date = models.IntegerField( choices=hours)
+
 
     def __str__(self):
         return str(self.day)
+
+    def save(self, *args, **kwargs):
+        # Check if the date has already been booked for the selected day
+        existing_book = Book.objects.filter(day=self.day, date=self.date).exists()
+
+        if not existing_book:
+            # Date hasn't been booked for the selected day, save the instance
+            super().save(*args, **kwargs)
+            # Optionally, you can remove the date from choices here as well
+        else:
+            # Date has already been booked for the selected day, handle this case
+            # For simplicity, we'll just print a message here
+            print(f"The date {self.date} has already been booked for the day {self.day}.")
+
+
     

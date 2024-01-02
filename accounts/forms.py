@@ -1,5 +1,5 @@
 from django import forms
-from .models import Account , Profile , Book
+from .models import Account , Profile , Book , Day
 
 
 
@@ -46,7 +46,7 @@ class ProfileForm(forms.ModelForm):
         fields = ['phone_number','address','image','country','city','company','headline','about','address_line_1','address_line_2','fb_link','twitter_link','instagram_link','linked_in_link']
 
 
-class Book(forms.ModelForm):
+class Bookking(forms.ModelForm):
     class Meta:
         model = Book
         fields = [ 'date' ]
