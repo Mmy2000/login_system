@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
+from django.utils.text import slugify 
 
 # Create your models here.
 
@@ -107,3 +109,22 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+
+class Day(models.Model):
+    name = models.CharField(max_length=50)
+    caption = models.CharField( max_length=5000)
+    slug = models.SlugField(null=True,blank=True)
+
+    def save(self,*args, **kwargs):
+        if not self.slug:
+            self.slug=slugify(self.name)
+        super(Day,self).save(*args,**kwargs)
+
+    def get_absolute_url(self):
+        return reverse("day_detail", kwargs={"slug": self.slug})
+    
+
+    def __str__(self):
+        return self.name
+    
