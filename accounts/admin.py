@@ -16,5 +16,7 @@ class AccountAdmin(UserAdmin):
 
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Profile)
+class DayAdmin(admin.ModelAdmin):
+    list_display = ('user' , 'day' , 'date')
 admin.site.register(Day)
-admin.site.register(Book)
+admin.site.register(Book,DayAdmin)

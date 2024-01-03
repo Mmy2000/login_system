@@ -151,18 +151,7 @@ class Book(models.Model):
     def __str__(self):
         return str(self.day)
 
-    def save(self, *args, **kwargs):
-        # Check if the date has already been booked for the selected day
-        existing_book = Book.objects.filter(day=self.day, date=self.date).exists()
-
-        if not existing_book:
-            # Date hasn't been booked for the selected day, save the instance
-            super().save(*args, **kwargs)
-            # Optionally, you can remove the date from choices here as well
-        else:
-            # Date has already been booked for the selected day, handle this case
-            # For simplicity, we'll just print a message here
-            print(f"The date {self.date} has already been booked for the day {self.day}.")
+    
 
 
     
