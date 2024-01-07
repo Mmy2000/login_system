@@ -5,6 +5,8 @@ from accounts.forms import Bookking
 from django.views.generic.edit import FormMixin
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 
 def home(request):
@@ -32,7 +34,7 @@ class DayDetail(FormMixin ,DetailView):
                 return redirect('/')
             else:
                 messages.error(request, "This date is already booked for that day .")
-                return redirect('/')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         else:
             form=self.get_form()
 

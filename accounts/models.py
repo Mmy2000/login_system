@@ -77,7 +77,6 @@ class Account(AbstractBaseUser):
     
 class Profile(models.Model):
     user = models.OneToOneField(Account,on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=50, null= True)
     phone_number = models.CharField(max_length=20)
     address = models.CharField(max_length=50)
     image = models.ImageField(upload_to='users/')
