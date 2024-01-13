@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect
 from .forms import RegistrationForm ,UserForm , ProfileForm
-from .models import Account , Profile
+from .models import Account , Profile , Book
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 # Verification email
@@ -216,3 +216,7 @@ def change_password(request):
             return redirect('change_password')
 
     return render(request , 'accounts/change_password.html')
+
+def my_booking(request):
+    mybooking = Book.objects.filter(user=request.user)
+    return render(request , 'accounts/my_booking.html' , {'mybooking':mybooking})
