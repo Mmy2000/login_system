@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.text import slugify 
+from django.utils import timezone
 
 # Create your models here.
 
@@ -145,8 +146,10 @@ class Book(models.Model):
     user = models.ForeignKey(Account,  on_delete=models.CASCADE)
     day = models.ForeignKey(Day, related_name="book_property",  on_delete=models.CASCADE)
     date = models.IntegerField( choices=hours)
+    created_at = models.DateTimeField(default=timezone.now)
 
-
+    def full_date(self):
+        return f'{self.day} {self.date}'
     def __str__(self):
         return str(self.day)
 
