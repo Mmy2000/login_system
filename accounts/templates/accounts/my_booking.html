@@ -1,20 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
 {% block body %}
 <main id="main" class="main">
     <section class="section">
         {% include "includes/alerts.html" %}
         <div class="row">
+            {% if mybooking %}
             {% for book in mybooking %}
             <div class="col-sm-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{book}}</h5>
                         <p class="card-text">{{book.day}} | {{book.date}} o'clock</p>
+                        <a href="{% url 'delete_book' book.id %}">Delete</a>
                     </div>
                 </div>
             </div>
             {% endfor %}
+            {% else %}
+            <h1><center>No Booking Yet!</center></h1>
+            {% endif %}
         </div>
     </section>
 </main>

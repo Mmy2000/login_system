@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , get_object_or_404
 from .forms import RegistrationForm ,UserForm , ProfileForm
 from .models import Account , Profile , Book
 from django.contrib import messages, auth
@@ -10,6 +10,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 def register(request):
@@ -220,3 +222,9 @@ def change_password(request):
 def my_booking(request):
     mybooking = Book.objects.filter(user=request.user)
     return render(request , 'accounts/my_booking.html' , {'mybooking':mybooking})
+
+def delete_book(request , id):
+    mybooking = get_object_or_404(Book , id=id)
+    mybooking.delete()
+    messages.success(request,  'The Book has been deleted successfully.')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
