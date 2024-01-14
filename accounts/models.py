@@ -148,8 +148,7 @@ class Book(models.Model):
     date = models.IntegerField( choices=hours)
     created_at = models.DateTimeField(default=timezone.now)
 
-    def full_date(self):
-        return f'{self.day} {self.date}'
+
     def __str__(self):
         return str(self.day)
 

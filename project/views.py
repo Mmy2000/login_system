@@ -27,6 +27,10 @@ class DayDetail(FormMixin ,DetailView):
             myform.day= self.get_object()
             myform.user = request.user
             existing_book = Book.objects.filter(day= myform.day, date=myform.date).exists()
+            existing = Book.objects.filter(user=request.user).exists()
+            if existing:
+                    messages.error(request, "you already booked.")
+                    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
             if not existing_book:
                 # Date hasn't been booked for the selected day, save the instance
                 myform.save()
@@ -35,6 +39,7 @@ class DayDetail(FormMixin ,DetailView):
             else:
                 messages.error(request, "This date is already booked for that day .")
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+                
         else:
             form=self.get_form()
 
