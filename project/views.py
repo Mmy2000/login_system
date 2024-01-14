@@ -42,4 +42,4 @@ class DayDetail(FormMixin ,DetailView):
                 
         else:
             form=self.get_form()
-
+    

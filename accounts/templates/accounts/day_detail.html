@@ -5,11 +5,15 @@
 <main id="main" class="main">
     <section class="section">
         {% include "includes/alerts.html" %}
+        {% if existing %}
+        <h2>you already booked.</h2>
+        {% else %}
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% bootstrap_button button_type="submit" content="Book" %}
         </form>
+        {% endif %}
         
     </section>
 </main>
