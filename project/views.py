@@ -52,7 +52,7 @@ def edit_book(request):
             myform.user = request.user
             myform.save()
             messages.success(request, 'book updated successfully')
-            return redirect(reverse(''))
+            return redirect(reverse('my_booking'))
     else:
         form = Bookking(instance=book)
 
