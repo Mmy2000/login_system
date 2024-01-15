@@ -14,6 +14,7 @@
                         <h5 class="card-title">{{book}}</h5>
                         <p class="card-text">{{book.day}} | {{book.date}} o'clock</p>
                         <a href="{% url 'delete_book' book.id %}" onclick="return confirm('Are You Sure You Want To Delete This book ?')">Delete</a>
+                        <a href="{% url 'edit_book'  %}" >Edit</a>
                     </div>
                 </div>
             </div>

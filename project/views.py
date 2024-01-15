@@ -43,3 +43,19 @@ class DayDetail(FormMixin ,DetailView):
         else:
             form=self.get_form()
     
+def edit_book(request):
+    book = Book.objects.filter(user=request.user).first()
+    if request.method == "POST":
+        form = Bookking(request.POST , instance=book)
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.user = request.user
+            myform.save()
+            messages.success(request, 'book updated successfully')
+            return redirect(reverse(''))
+    else:
+        form = Bookking(instance=book)
+
+    return render(request,'accounts/book_edit.html',{
+        'form':form,
+    })
