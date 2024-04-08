@@ -147,6 +147,7 @@ class Book(models.Model):
     day = models.ForeignKey(Day, related_name="book_property",  on_delete=models.CASCADE)
     date = models.IntegerField( choices=hours)
     created_at = models.DateTimeField(default=timezone.now)
+    is_booked = models.BooleanField(default=True)
 
 
     def __str__(self):
