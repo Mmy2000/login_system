@@ -17,6 +17,6 @@ class AccountAdmin(UserAdmin):
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Profile)
 class DayAdmin(admin.ModelAdmin):
-    list_display = ( 'day' ,'user', 'date')
+    list_display = ( 'day' ,'user', 'date' , 'is_booked')
 admin.site.register(Day)
 admin.site.register(Book,DayAdmin)
