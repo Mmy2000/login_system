@@ -225,6 +225,7 @@ def my_booking(request):
 
 def delete_book(request , id):
     mybooking = get_object_or_404(Book , id=id)
+    my_booking.is_booked = False
     mybooking.delete()
     messages.success(request,  'The Book has been deleted successfully.')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
